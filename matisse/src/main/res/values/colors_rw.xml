@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="rw_primary">#FFFFFF</color>
+    <color name="rw_primary_dark">#FFFFFF</color>
+
+    <color name="rw_item_checkCircle_backgroundColor">#7F2FA6</color>
+
+    <color name="rw_bottom_toolbar_apply_text">#7F2FA6</color>
+    <color name="rw_bottom_toolbar_apply_text_disable">#999999</color>
+
+    <color name="rw_preview_bottom_toolbar_apply_text">#7F2FA6</color>
+    <color name="rw_preview_bottom_toolbar_apply_text_disable">#999999</color>
+</resources>

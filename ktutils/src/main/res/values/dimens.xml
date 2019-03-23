@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 常用字体大小 -->
+    <dimen name="textSize_s">13sp</dimen>
+    <dimen name="textSize_m">14sp</dimen>
+    <dimen name="textSize_h">15sp</dimen>
+    <dimen name="textSize_xh">16sp</dimen>
+    <dimen name="textSize_xxh">17sp</dimen>
+    <dimen name="textSize_xxxh">18sp</dimen>
+
+    <dimen name="ios_dialog_title_size">16sp</dimen>
+    <dimen name="ios_dialog_msg_size">14sp</dimen>
+    <dimen name="ios_dialog_left_btn_text_size">14sp</dimen>
+    <dimen name="ios_dialog_right_btn_text_size">14sp</dimen>
+</resources>

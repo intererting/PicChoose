@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="default_statusbar_color">#B3B3B3</color>
+    <color name="white_color">#FFFFFF</color>
+
+    <color name="ios_dialog_title_color">#333333</color>
+    <color name="ios_dialog_msg_color">#333333</color>
+    <color name="ios_dialog_button_def_color">#0079fd</color>
+    <color name="ios_dialog_btn_normal">#ffffff</color>
+    <color name="ios_dialog_btn_pressed">#f4f4f4</color>
+    <color name="ios_blue">#0079fd</color>
+
+    <color name="common_gray">#6E6E6E</color>
+</resources>

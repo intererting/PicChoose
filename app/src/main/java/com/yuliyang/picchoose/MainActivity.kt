@@ -9,7 +9,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
@@ -50,9 +49,11 @@ class MainActivity : AppCompatActivity() {
         startPic.setOnClickListener {
             if (currentType == 0) {
                 Matisse.from(this@MainActivity)
-                    .choose(MimeType.ofImage())
+                    .choose(MimeType.ofVideo())
                     .countable(false)
                     .maxSelectable(1)
+                    .theme(R.style.Matisse_RightWay)
+                    .showSingleMediaType(true)
                     .gridExpectedSize(resources.getDimensionPixelSize(R.dimen.grid_expected_size))
                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                     .thumbnailScale(0.85f)
