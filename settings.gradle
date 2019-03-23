@@ -1,1 +1,1 @@
-include ':app', ':matisse', ':ktutils'
+include ':app', ':matisse', ':ktutils', ':videotrim'

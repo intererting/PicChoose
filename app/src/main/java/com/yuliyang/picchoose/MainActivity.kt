@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
+import com.iknow.android.features.trim.VideoTrimmerActivity
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
@@ -80,7 +81,8 @@ class MainActivity : AppCompatActivity() {
             }
         } else if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             //从相册选取
-            cropImage(Matisse.obtainResult(data)[0])
+//            cropImage(Matisse.obtainResult(data)[0])
+            VideoTrimmerActivity.call(this, Matisse.obtainPathResult(data)[0])
         } else if (requestCode == REQUEST_CODE_CROP && resultCode == RESULT_OK) {
             println("success")
         }
