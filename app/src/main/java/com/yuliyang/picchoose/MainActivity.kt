@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         startPic.setOnClickListener {
             if (currentType == 0) {
                 Matisse.from(this@MainActivity)
-                    .choose(MimeType.ofVideo())
+                    .choose(MimeType.ofImage())
                     .countable(false)
                     .maxSelectable(1)
                     .theme(R.style.Matisse_RightWay)
