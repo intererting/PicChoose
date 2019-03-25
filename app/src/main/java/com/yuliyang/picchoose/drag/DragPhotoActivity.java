@@ -136,10 +136,11 @@ public class DragPhotoActivity extends AppCompatActivity {
      * <p>
      * Code  under is shared transitions in all android versions implementation
      */
-    private void performExitAnimation(final DragPhotoView view, float x, float y, float mScaleCenterX, float mScaleCenterY) {
+    private void performExitAnimation(final DragPhotoView view, float x, float y,
+                                      float mScaleCenterX, float mScaleCenterY, float resultScale) {
         System.out.println(view.getDisplayRect().top);
         view.finishAnimationCallBack();
-        float viewX = mScaleCenterX + x - mScaleCenterX * (mScaleX);
+        float viewX = mScaleCenterX * (1 - resultScale) + (view.getDisplayRect().left) * resultScale + x;
         float viewY = mScaleCenterY + y - mScaleCenterY * (mScaleX);
         view.setX(viewX);
         view.setY(viewY);
@@ -152,7 +153,7 @@ public class DragPhotoActivity extends AppCompatActivity {
 
         ValueAnimator translateXAnimator = ValueAnimator.ofFloat(view.getX(), view.getX() + translateX);
         translateXAnimator.addUpdateListener(valueAnimator -> view.setX((Float) valueAnimator.getAnimatedValue()));
-        translateXAnimator.setDuration(5000);
+        translateXAnimator.setDuration(300);
         translateXAnimator.start();
         ValueAnimator translateYAnimator = ValueAnimator.ofFloat(view.getY(), view.getY() + translateY);
         translateYAnimator.addUpdateListener(valueAnimator -> view.setY((Float) valueAnimator.getAnimatedValue()));
@@ -179,7 +180,7 @@ public class DragPhotoActivity extends AppCompatActivity {
 
             }
         });
-        translateYAnimator.setDuration(5000);
+        translateYAnimator.setDuration(300);
         translateYAnimator.start();
     }
 

@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.ViewConfiguration;
 import com.github.chrisbanes.photoview.PhotoView;
 import org.jetbrains.anko.DimensionsKt;
 
@@ -44,6 +45,8 @@ public class DragPhotoView extends PhotoView {
     private float scaleCenterX = 0;
     private float scaleCenterY = 0;
 
+    private float mTouchSlop;
+
     public DragPhotoView(Context context) {
         this(context, null);
     }
@@ -57,6 +60,7 @@ public class DragPhotoView extends PhotoView {
         mPaint = new Paint();
         mPaint.setColor(Color.BLACK);
         MAX_TRANSLATE_Y = DimensionsKt.dip(this, 120);
+        mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
     }
 
     @Override
@@ -110,7 +114,6 @@ public class DragPhotoView extends PhotoView {
                         return true;
                     }
 
-
                     //防止下拉的时候双手缩放
                     if (mTranslateY >= 0 && mScale < 0.95) {
                         return true;
@@ -124,14 +127,13 @@ public class DragPhotoView extends PhotoView {
                         isTouchEvent = false;
                         //judge finish or not
                         postDelayed(() -> {
-                            if (mTranslateX == 0 && mTranslateY == 0 && canFinish) {
-
+                            if (mTranslateX == 0 && mTranslateY == 0 && canFinish && !isAnimate) {
                                 if (mTapListener != null) {
                                     mTapListener.onTap(DragPhotoView.this);
                                 }
                             }
                             canFinish = false;
-                        }, 300);
+                        }, DURATION - 1);
                     }
             }
         }
@@ -141,7 +143,7 @@ public class DragPhotoView extends PhotoView {
     private void onActionUp(MotionEvent event) {
         if (mTranslateY > MAX_TRANSLATE_Y && canFinish) {
             if (mExitListener != null) {
-                mExitListener.onExit(this, mTranslateX, mTranslateY, scaleCenterX, scaleCenterY);
+                mExitListener.onExit(this, mTranslateX, mTranslateY, scaleCenterX, scaleCenterY, mScale);
             } else {
                 throw new RuntimeException("DragPhotoView: onExitLister can't be null ! call setOnExitListener() ");
             }
@@ -151,6 +153,7 @@ public class DragPhotoView extends PhotoView {
     }
 
     private void onActionMove(MotionEvent event) {
+
         float moveY = event.getY();
         float moveX = event.getX();
         mTranslateX = moveX - mDownX;
@@ -273,12 +276,12 @@ public class DragPhotoView extends PhotoView {
     }
 
     public interface OnExitListener {
-        void onExit(DragPhotoView view, float translateX, float translateY, float w, float h);
+        void onExit(DragPhotoView view, float translateX, float translateY, float w, float h, float resultScale);
     }
 
     public void finishAnimationCallBack() {
-        mTranslateX = -scaleCenterX + scaleCenterX * (mScale * getScale());
-        mTranslateY = -scaleCenterY + scaleCenterY * (mScale * getScale());
+        mTranslateX = scaleCenterX * (mScale - 1) - (getDisplayRect().left) * mScale;
+        mTranslateY = -scaleCenterY + scaleCenterY * mScale;
         invalidate();
     }
 }
